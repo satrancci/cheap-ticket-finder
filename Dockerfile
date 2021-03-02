@@ -8,6 +8,6 @@ RUN sudo apt-get install -y python3-apt
 RUN python3 get-pip.py
 RUN python3 -m pip install selenium
 
-RUN mkdir run_dir
 WORKDIR /run_dir
+COPY ./run_dir .
 ENTRYPOINT python3 run_selenium.py
