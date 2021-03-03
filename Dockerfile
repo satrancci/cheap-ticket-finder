@@ -10,4 +10,5 @@ RUN python3 -m pip install selenium
 
 WORKDIR /run_dir
 COPY ./run_dir .
-ENTRYPOINT python3 run_selenium.py
+ENTRYPOINT ["python3", "run_selenium.py"]
+CMD [""]
