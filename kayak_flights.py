@@ -7,8 +7,6 @@ from random import randint
 
 BASE_URL = "https://www.kayak.com/flights/ORD-SFO/2021-04-06/2021-04-12?sort=price_a"
 
-#### XPaths ###
-
 results_list_xpath = "//div[@id='searchResultsList']"
 
 
@@ -31,7 +29,6 @@ def process_page(driver, base_url, timeout=20):
         print(f"[PROCESS_PAGE]: Could not find the alert close button...Returning...")
         return
     print(f"[PROCESS_PAGE]: Alert close button found!")
-    #print(f"[PROCESS_PAGE]: alert button: {button}")
     print(f"[PROCESS_PAGE]: Closing the alert dialog...")
     button.click()
 
@@ -50,26 +47,31 @@ def process_page(driver, base_url, timeout=20):
         f.write(base64.b64decode(image))
 
 
-    print(f"[PROCESS_PAGE]: Finding the results element...")
+    print(f"[PROCESS_PAGE]: Finding the results list element...")
     try:
-        results = driver.find_element_by_xpath(results_list_xpath).get_attribute("outerHTML")
+        results_list = driver.find_element_by_xpath(results_list_xpath).get_attribute("outerHTML")
+        print(f"[PROCESS_PAGE]: Results element found")
     except Exception as exc:
         print(f"[PROCESS_PAGE]: Could not find results list element by xpath: {exc}")
         raise
-    print(f"[PROCESS_PAGE]: Results element found")
+    
     try:
-        '''
-        print(f"[PROCESS_PAGE]: Writing full code to disk...")
-        html = driver.page_source
-        with open("full_page.html", "w") as f:
-            f.write(html)
-        print(f"[PROCESS_PAGE]: Full code successfully written to disk...")
-        '''
-
-        print(f"[PROCESS_PAGE]: Writing flight results element to disk...")
-        with open("results_list.html", "w") as f:
-            f.write(results)
-        print(f"[PROCESS_PAGE]: Results list element successfully written to disk...")
+        print(f"[PROCESS_PAGE]: Parsing the results list element and extracting prices...")
+        soup = bs(results_list, "html.parser")
+        results = list(filter(lambda x: x!="\n", list(filter(lambda x: x!="\n", list(soup.children)[0]))[0]))
+        prices = soup.find_all('span', {'class': 'price-text'})
+        prices = sorted(list(map(lambda x: int(x.text.strip()[1:]), prices)))
+        print(f"[PROCESS_PAGE]: Prices parsed: {prices}")
+    except Exception as exc:
+        print(f"[PROCESS_PAGE]: Could not extract prices from the results list: {exc}")
+        raise
+    try:
+        print(f"[PROCESS_PAGE]: Writing prices to disk...")
+        with open("prices.txt", "w") as f:
+            for price in prices:
+               f.write(str(price))
+               f.write('\n')
+        print(f"[PROCESS_PAGE]: Prices successfully written to disk...")
     except Exception as exc:
         print(f"[PROCESS_PAGE]: Could not write to disk: {exc}")
 
@@ -85,7 +87,6 @@ def run(base_url, timeout=5):
     options.add_argument('--no-sandbox')
     driver=webdriver.Chrome('/usr/bin/chromedriver', options=options)
     driver.set_window_size(1920,1080)
-    driver.maximize_window()
 
 
     print(f"[RUNNER]: Chrome driver successfully configured")
@@ -96,8 +97,6 @@ def run(base_url, timeout=5):
     except Exception as exc:
         print(f"[RUNNER]: Page could not be processed: {exc}")
         raise
-
-
 
     print("[RUNNER]: Crawling successfully done!")
     print("[RUNNER]: Quitting the driver...")
