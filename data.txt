@@ -1,0 +1,9 @@
+1,kayak_flight,NYC,STL,2021-04-21
+2,kayak_flight,SFO,SEA,2021-04-21
+3,kayak_flight,HNL,LAX,2021-04-21
+4,kayak_flight,NYC,STL,2021-04-22
+5,kayak_flight,SFO,SEA,2021-04-22
+6,kayak_flight,HNL,LAX,2021-04-22
+7,kayak_flight,NYC,STL,2021-04-23
+8,kayak_flight,SFO,SEA,2021-04-23
+9,kayak_flight,HNL,LAX,2021-04-23
