@@ -12,7 +12,7 @@ from parse_selenium_args import *
 try:
     print(f"[kayak_flights.py]: Validating arguments...")
     args = sys.argv
-    ret_code, COUNTRY_CODE, DATA_ID, TRAVEL_TYPE, AIRPORT_ORIG, AIRPORT_DEST, FLIGHT_DATE = parse_kayak_flights(args)
+    ret_code, COUNTRY_CODE, DATA_ID, TRAVEL_TYPE, AIRPORT_ORIG, AIRPORT_DEST, FLIGHT_DATE = parse_flight_args(args)
     if ret_code != 0:
         print(f"[kayak_flights.py]: Could not import or parse arguments")
         raise
