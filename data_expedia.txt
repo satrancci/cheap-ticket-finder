@@ -1,0 +1,2 @@
+10,expedia_flight,HNL,LAX,4-23-2021
+11,expedia_flight,CDG,BCN,5-27-2021
