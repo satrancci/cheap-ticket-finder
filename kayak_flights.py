@@ -154,8 +154,8 @@ def run(base_url, country_code, data_id):
 
     print("[RUNNER]: Crawling successfully done!")
     print("[RUNNER]: Quitting the driver...")
-    print(f"[RUNNER]: Sleeping for {TIMEOUT*10} seconds...")
-    sleep(TIMEOUT*10)
+    print(f"[RUNNER]: Sleeping for {TIMEOUT} seconds...")
+    sleep(TIMEOUT)
     driver.quit()
 
 
