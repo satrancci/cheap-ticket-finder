@@ -53,28 +53,6 @@ do
         echo "Spinning up a selenium container for location $code..."
         docker run -v "$(pwd)"/crawled_data/$randint:/run_dir/data --net=container:$container_name --rm --name "selenium_$randint" selenium $data_point $code
 
-        # # Making sure that the run was successful (prices.txt is non-empty)
-        # echo "Double checking whether the run was successful..."
-        # uniq_id=$(echo "$data_point" | cut -d ',' -f1)
-        # echo "uniq_id: $uniq_id"
-
-        # base_dir="./crawled_data/$randint"
-        # echo "base_dir: $base_dir"
-
-        # base_filename="$uniq_id"_"$code"
-        # prices_filename="$base_filename"_"prices.txt"
-        # echo "prices_filename: $prices_filename"
-
-        # prices_n_lines= $(cat $base_dir/$prices_filename | wc -l)
-        # echo "prices_n_lines: $prices_n_lines"
-
-        # if ( $prices_n_lines == 0 ); then
-        #     echo "Prices file is empty. Removing all files from the current run..."
-        #     find base_dir | grep base_filename | xargs rm
-        # fi
-
-        # find ./crawled_data | grep prices | xargs wc -l  # find number of lines for each prices txt file (data cleansing step) 
-
     done
 
 done

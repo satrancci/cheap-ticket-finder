@@ -1,7 +1,4 @@
 
-#LENGTH=$(ls nordvpn_servers | grep -v servers.txt | wc -l)
-#echo "Number of countries: $LENGTH"
-
 LENGTH=$(cat data.txt | wc -l)
 echo "data.txt has $LENGTH data points"
 N=$1
@@ -18,8 +15,6 @@ if (($N <= 0 || $N > 5)); then
   echo "error: N must be between 1 and 5 inclusive" >&2; exit 1
 fi
 
-#chunk=$(expr $LENGTH / $N)
-#echo "chunk size: $chunk"
 
 if ($(expr $LENGTH % $N > 0)); then
     n_processes=$(expr $N + 1 ) # to account for the last chunk. E.g. if Length=58 and N=4, 4 chunks will have size 14 and the last one will have size 2.
@@ -33,5 +28,3 @@ n_chunks=$(expr $LENGTH / $N)
 echo "n_chunks: $n_chunks"
 
 cat data.txt | xargs -n $n_chunks -P $n_processes bash run_helper.sh
-
-#ls nordvpn_servers | grep -v servers.txt | xargs -n $chunk -P $n_processes bash run_helper.sh

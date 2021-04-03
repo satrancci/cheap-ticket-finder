@@ -5,3 +5,5 @@ tr32
 tr33
 tr34
 tr36
+tr39
+tr40
