@@ -8,7 +8,7 @@ declare -a countries
 for file in $(ls ./nordvpn_servers/ | shuf); # to minimize risk of more than one container connecting to the same NordVPN server at the same time
 do
     if [ "$file" != "servers.txt" ]; then
-        echo "$file"
+        #echo "$file"
         countries=(${countries[@]} "./nordvpn_servers/$file")
     fi
 done
