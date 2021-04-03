@@ -1,6 +1,6 @@
 ### Read data ###
 declare -a data_points
-for file in $(cat data_expedia.txt); # to minimize risk of more than one container connecting to the same NordVPN server at the same time
+for file in $(cat data_expedia.txt);
 do
     echo "$file imported"
     data_points=(${data_points[@]} "$file")
