@@ -65,7 +65,7 @@ do
         echo "#### START OF SELENIUM STDOUT: ####" >> "$logs_filename"
         echo "" >> "$logs_filename"
 
-        echo "Calling expedia_flights.py..."
+        echo "Running expedia_flights.py..."
         python3 expedia_flights.py $data_point $code >> "$logs_filename"
         echo "expedia_flights.py exitted. Writing hotspotshield status to logs..."
         echo "" >> "$logs_filename"
