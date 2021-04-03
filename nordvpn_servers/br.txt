@@ -8,11 +8,6 @@ br51
 br52
 br60
 br61
-br64
-br65
-br66
-br67
-br68
 br69
 br53
 br70
