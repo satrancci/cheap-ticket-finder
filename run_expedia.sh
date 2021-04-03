@@ -8,7 +8,7 @@ do
 done
 echo "${#data_points[@]} data_points"
 
-### Read HotspothShield VPN country codes ### 
+### Read HotspotShield VPN country codes ### 
 declare -a countries
 for file in $(cat hotspot_shield_codes.txt);
 do
