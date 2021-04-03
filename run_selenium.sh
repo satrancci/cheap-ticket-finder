@@ -11,15 +11,24 @@ echo "Script type: $script_type"
 logs_filename="./data/$uniq_id"_"$code"_"logs.txt"
 echo "logs_filename: $logs_filename"
 
+echo "Writing to logs before calling selenium"
 curl ipinfo.io > "$logs_filename"
-echo "\n" >> "$logs_filename" 
+echo "" >> "$logs_filename" 
 
+echo "#### START OF SELENIUM STDOUT: ####" >> "$logs_filename"
+echo "" >> "$logs_filename"
+
+echo "Selecting selenium script..."
 if [ "$script_type" = "kayak_flight" ]; then
     echo "Running kayak_flights.py..."
-    python3 -u kayak_flights.py $arg1 $code
+    python3 kayak_flights.py $arg1 $code >> "$logs_filename"
 else
     echo "Could not find kayak_flights.py."
     exit 1
 fi 
 
+echo "selenium exitted. Writing to logs..."
+echo "" >> "$logs_filename"
+echo "#### END OF SELENIUM STDOUT ####" >> "$logs_filename"
+echo "" >> "$logs_filename"
 curl ipinfo.io >> "$logs_filename"
