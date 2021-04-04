@@ -23,8 +23,8 @@ if [ "$script_type" = "kayak_flight" ]; then
     echo "Running kayak_flights.py..."
     python3 kayak_flights.py $arg1 $code >> "$logs_filename"
 else
-    echo "Could not find kayak_flights.py."
-    exit 1
+    echo "Running expedia_flights.py..."
+    python3 expedia_flights.py $arg1 $code >> "$logs_filename"
 fi 
 
 echo "selenium exitted. Writing to logs..."
