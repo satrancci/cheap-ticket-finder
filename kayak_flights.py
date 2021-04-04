@@ -91,7 +91,7 @@ def process_page(driver, base_url, country_code, data_id):
         soup = bs(results_list, "html.parser")
         results = list(filter(lambda x: x!="\n", list(filter(lambda x: x!="\n", list(soup.children)[0]))[0]))
         prices = soup.find_all('span', {'class': 'price-text'})
-        prices = sorted(list(map(lambda x: int(x.text.strip()[1:]), prices)))
+        prices = sorted(list(map(lambda x: int(x.text.strip()[1:].replace(',', '')), prices)))
         print(f"[PROCESS_PAGE]: Prices parsed: {prices}")
     except Exception as exc:
         print(f"[PROCESS_PAGE]: Could not extract prices from the results list: {exc}")
