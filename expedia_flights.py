@@ -38,7 +38,7 @@ RESULTS_LIST_XPATH = "//ul[@data-test-id='listings']"
 
 def process_page(driver, base_url, country_code, data_id):
 
-    BASE_DIR = "crawled_data/expedia"
+    BASE_DIR = "data"
     ZOOM_PCT = 50
     TIMEOUT = randint(20,30)
     FILENAME_BASE= f"./{BASE_DIR}/{data_id}_{country_code}"
